@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { ProviderId } from 'next-auth/providers';
 import { loginWithCredentials, loginWithGithub } from '../actions/login';
-import { LoginForm } from '../login/Login.schemas';
+import { LoginForm } from '../schemas/login.schemas';
 import { ApiResponse } from '@/types/api/responses';
 import { ErrorType } from '@/types/api/errors';
 
 type AuthHandler<P extends ProviderId> = P extends 'credentials'
     ? (values: LoginForm) => Promise<ApiResponse>
-    : () => Promise<ApiResponse>;
+    : () => Promise<ApiResponse | undefined>;
 
 const useNextAuth = () => {
     const [isLoggingInWith, setIsLogginInWith] = useState<ProviderId | ''>('');
@@ -39,7 +39,7 @@ const useNextAuth = () => {
             );
         } catch (error) {
             if (error instanceof Error) {
-                // This is not actually an error, signIn method throws an NEXT_REDIRECT error when it's wrapped with try...catch block
+                // This is not actually an error, signIn method throws an NEXT_REDIRECT error when it's wrapped with try...catch block even tho the request was successful
                 if (error.message === ErrorType.NextRedirect) {
                     return {
                         status: 200,

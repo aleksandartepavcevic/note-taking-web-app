@@ -1,7 +1,7 @@
 'use server';
 
 import { signIn } from '@/lib/next-auth';
-import { LoginForm } from '../login/Login.schemas';
+import { LoginForm } from '../schemas/login.schemas';
 import GenericError from '@/utils/errors';
 import { ApiResponse } from '@/types/api/responses';
 import { ErrorType } from '@/types/api/errors';

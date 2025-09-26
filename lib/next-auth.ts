@@ -36,8 +36,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         String(user.password),
                     );
 
-                    console.log('IS VALID -->', isValid);
-
                     if (!isValid) return null;
 
                     return user;

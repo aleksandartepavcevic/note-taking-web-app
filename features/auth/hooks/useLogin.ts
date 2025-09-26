@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { loginFormSchema, LoginForm } from '../Login.schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import useNextAuth from '../../hooks/useNextAuth';
+import useNextAuth from './useNextAuth';
 import { ProviderId } from 'next-auth/providers';
+import { LoginForm, loginFormSchema } from '../schemas/login.schemas';
 
 const useLogin = () => {
     const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -26,8 +26,6 @@ const useLogin = () => {
     ) => {
         try {
             const response = await handleLogin(providerId, values);
-
-            console.log('response', response);
 
             if (!response?.success && providerId === 'credentials') {
                 form.setError('root', {

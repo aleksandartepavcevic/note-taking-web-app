@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui/typography';
 import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon, GithubIcon } from 'lucide-react';
 import Link from 'next/link';
-import useLogin from './hooks/useLogin';
+import useLogin from '../hooks/useLogin';
 import {
     Form,
     FormControl,

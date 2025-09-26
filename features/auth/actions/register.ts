@@ -1,7 +1,7 @@
 'use server';
 
 import { createNewUser, getUserFromDb } from '@/utils/db';
-import { RegisterForm } from '../register/Register.schemas';
+import { RegisterForm } from '../schemas/register.schemas';
 import { saltAndHashPassword } from '@/utils/password';
 import GenericError from '@/utils/errors';
 import { ErrorType } from '@/types/api/errors';

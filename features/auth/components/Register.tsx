@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import Typography from '@/components/ui/typography';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import useRegister from './hooks/useRegister';
+import useRegister from '../hooks/useRegister';
 
 const Register = () => {
     const {
