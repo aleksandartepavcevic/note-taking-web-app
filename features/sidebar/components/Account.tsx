@@ -11,13 +11,13 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import Typography from '@/components/ui/typography';
-import { auth } from '@/lib/next-auth';
 import { ChevronsUpDown } from 'lucide-react';
+import { User } from 'next-auth';
+import Link from 'next/link';
 import React from 'react';
+import { signOut } from '@/lib/next-auth';
 
-const Account = async () => {
-    const { user } = (await auth()) || {};
-
+const Account = ({ user }: { user?: User }) => {
     const getUserInitials = (name?: string | null) => {
         if (!name) return;
 
@@ -36,6 +36,14 @@ const Account = async () => {
         return strings[0];
     };
 
+    const handleSignOut = async () => {
+        'use server';
+
+        await signOut({
+            redirectTo: '/',
+        });
+    };
+
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -47,7 +55,7 @@ const Account = async () => {
                             size="lg"
                             className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <Avatar className="rounded-md size-9">
+                                <Avatar className="rounded-sm size-9">
                                     {user?.image && (
                                         <AvatarImage src={user.image} />
                                     )}
@@ -66,15 +74,15 @@ const Account = async () => {
                                     </Typography>
                                 </div>
                             </div>
-                            <ChevronsUpDown className="group-data-[collapsible=icon]:hidden" />
+                            <ChevronsUpDown className="size-4! group-data-[collapsible=icon]:hidden" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" side="right">
-                        <DropdownMenuItem>
-                            <span>Settings</span>
+                        <DropdownMenuItem asChild>
+                            <Link href="/settings">Settings</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <span>Sign out</span>
+                        <DropdownMenuItem onClick={handleSignOut}>
+                            Sign Out
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

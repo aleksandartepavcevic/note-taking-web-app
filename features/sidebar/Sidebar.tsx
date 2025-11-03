@@ -1,5 +1,5 @@
-import { SidebarLogo } from '@/components/logo';
 import React from 'react';
+import { SidebarLogo } from '@/components/logo';
 import Tags from './components/Tags';
 import {
     SidebarContent,
@@ -11,8 +11,13 @@ import {
 import { Separator } from '@/components/ui/separator';
 import Links from './components/Links';
 import Account from './components/Account';
+import { auth } from '@/lib/next-auth';
 
-const Sidebar = () => {
+const Sidebar = async () => {
+    const session = await auth();
+
+    const { user } = session || {};
+
     return (
         <SidebarUI collapsible="icon">
             <SidebarRail />
@@ -24,8 +29,9 @@ const Sidebar = () => {
                 <Separator />
                 <Tags />
             </SidebarContent>
+            <Separator />
             <SidebarFooter>
-                <Account />
+                <Account user={user} />
             </SidebarFooter>
         </SidebarUI>
     );

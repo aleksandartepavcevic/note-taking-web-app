@@ -18,16 +18,23 @@ const Logo = ({ className }: React.ComponentProps<'div'>) => {
 
 const SidebarLogo = () => {
     return (
-        <SidebarMenuItem className="group/link flex items-center">
-            <SidebarMenuButton className="hover:bg-transparent w-fit" asChild>
-                <Link href="/notes">
-                    <Image src="/logo.svg" alt="Logo" width={20} height={20} />
-                    <span className="text-xl font-pacifico font-medium whitespace-nowrap">
-                        Notes
-                    </span>
-                </Link>
-            </SidebarMenuButton>
-        </SidebarMenuItem>
+        <div className="w-fit">
+            <SidebarMenuItem className="group/link flex items-center">
+                <SidebarMenuButton className="hover:bg-transparent" asChild>
+                    <Link href="/notes">
+                        <Image
+                            src="/logo.svg"
+                            alt="Logo"
+                            width={20}
+                            height={20}
+                        />
+                        <span className="text-xl font-pacifico font-medium">
+                            Notes
+                        </span>
+                    </Link>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
+        </div>
     );
 };
 

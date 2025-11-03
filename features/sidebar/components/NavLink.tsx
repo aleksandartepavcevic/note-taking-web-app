@@ -1,7 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ChevronRight, LucideProps, Tag } from 'lucide-react';
+import {
+    ChevronRight,
+    LockKeyhole,
+    LucideProps,
+    Sun,
+    Tag,
+    Type,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Archive, House } from 'lucide-react';
@@ -32,6 +38,9 @@ export default function NavLink({
         house: House,
         archived: Archive,
         tag: Tag,
+        sun: Sun,
+        type: Type,
+        lock: LockKeyhole,
     };
 
     const Icon = iconMap[icon];
@@ -60,7 +69,7 @@ export default function NavLink({
                     <ChevronRight
                         data-active={isActive}
                         className={cn(
-                            'ml-auto transition-all group-hover/link:opacity-100 group-hover/link:translate-x-[-6px] opacity-0 data-[active=true]:opacity-100 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:hidden',
+                            'size-4! ml-auto transition-all group-hover/link:opacity-100 group-hover/link:translate-x-[-6px] opacity-0 data-[active=true]:opacity-100 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:hidden',
                         )}
                     />
                 </Link>

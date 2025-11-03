@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Pacifico } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cookies } from 'next/headers';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -34,12 +35,18 @@ export default async function RootLayout({
     const sidebarState = cookieStore.get('sidebar_state')?.value;
 
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`dark ${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}>
-                <SidebarProvider defaultOpen={sidebarState === 'true'}>
-                    {children}
-                </SidebarProvider>
+                className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange>
+                    <SidebarProvider defaultOpen={sidebarState === 'true'}>
+                        {children}
+                    </SidebarProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

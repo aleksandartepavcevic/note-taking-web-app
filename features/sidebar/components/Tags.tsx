@@ -23,6 +23,11 @@ const mockTags = [
     'typescript',
     'test123',
     'test3231',
+    '321321321',
+    '32132',
+    'dd21321dsa',
+    '32dhwaudwaoid',
+    '3u21832y9hdsjakl',
 ];
 
 const Tags = () => {
@@ -54,7 +59,7 @@ const Tags = () => {
             <ScrollArea
                 onViewportScrollCapture={handleScroll}
                 scrollHideDelay={0}
-                className="flex-1 p-3">
+                className="flex-1 p-3 h-full overflow-hidden">
                 <SidebarGroupContent className="p-1 flex flex-col flex-1 overflow-hidden h-full">
                     <SidebarMenu>
                         {mockTags.map((tag) => (
