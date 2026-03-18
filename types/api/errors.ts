@@ -4,4 +4,5 @@ export enum ErrorType {
     UserNotFound = 'UserNotFound',
     GithubSignin = 'GithubSignin',
     NextRedirect = 'NEXT_REDIRECT',
+    InvalidPassword = 'InvalidPassword',
 }

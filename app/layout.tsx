@@ -1,24 +1,38 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Pacifico } from 'next/font/google';
+import {
+    Noto_Sans,
+    Noto_Serif,
+    Pacifico,
+    Source_Code_Pro,
+} from 'next/font/google';
 import './globals.css';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cookies } from 'next/headers';
 import { ThemeProvider } from '@/components/theme-provider';
+import { FontProvider } from '@/components/font-provider';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
+const notoSans = Noto_Sans({
+    variable: '--font-sans',
     subsets: ['latin'],
+    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
+const notoSerif = Noto_Serif({
+    variable: '--font-serif',
     subsets: ['latin'],
+    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
+
+const sourceCodePro = Source_Code_Pro({
+    variable: '--font-monospace',
+    subsets: ['latin'],
+    weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 const pacifico = Pacifico({
-    weight: ['400'],
     variable: '--font-pacifico',
     subsets: ['latin'],
+    weight: ['400'],
 });
 
 export const metadata: Metadata = {
@@ -37,16 +51,18 @@ export default async function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange>
-                    <SidebarProvider defaultOpen={sidebarState === 'true'}>
-                        {children}
-                    </SidebarProvider>
-                </ThemeProvider>
+                className={`${notoSans.variable} ${notoSerif.variable} ${sourceCodePro.variable} ${pacifico.variable} antialiased`}>
+                <FontProvider defaultFont="sans">
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange>
+                        <SidebarProvider defaultOpen={sidebarState === 'true'}>
+                            {children}
+                        </SidebarProvider>
+                    </ThemeProvider>
+                </FontProvider>
             </body>
         </html>
     );

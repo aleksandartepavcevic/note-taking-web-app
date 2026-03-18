@@ -1,7 +1,7 @@
-import React from 'react';
+import { FontTheme } from '@/features/settings';
 
 const FontThemePage = () => {
-    return <div>FontThemePage</div>;
+    return <FontTheme />;
 };
 
 export default FontThemePage;

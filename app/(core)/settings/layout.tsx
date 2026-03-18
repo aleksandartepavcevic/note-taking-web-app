@@ -1,9 +1,14 @@
 import { Separator } from '@/components/ui/separator';
 import NavLink from '@/features/sidebar/components/NavLink';
 import { IconOptions } from '@/features/sidebar/types/navlink.types';
+import { auth } from '@/lib/next-auth';
+import { getUserAccountFromDb } from '@/utils/db';
 import React from 'react';
 
-const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
+const SettingsLayout = async ({ children }: { children: React.ReactNode }) => {
+    const session = await auth();
+    const userAccount = await getUserAccountFromDb(session?.user?.id || '');
+
     const links = [
         {
             url: '/settings/color-theme',
@@ -15,16 +20,18 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
             icon: 'type',
             label: 'Font Theme',
         },
-        {
-            url: '/settings/change-password',
-            icon: 'lock',
-            label: 'Change Password',
-        },
-    ] satisfies {
+    ] as {
         url: string;
         icon: IconOptions;
         label: string;
     }[];
+
+    if (!userAccount?.provider)
+        links.push({
+            url: '/settings/change-password',
+            icon: 'lock',
+            label: 'Change Password',
+        });
 
     return (
         <div className="flex h-full overflow-hidden">
